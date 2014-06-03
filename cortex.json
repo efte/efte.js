@@ -1,0 +1,21 @@
+{
+  "name": "efte.js",
+  "version": "0.1.0",
+  "description": "Foundation js for efte projects",
+  "main": "index.js",
+  "repository": "https://github.com/efte/efte.js",
+  "keywords": [],
+  "license": "MIT",
+  "author": {
+    "name": "Wei Gao",
+    "email": "jky239@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/efte/efte.js/issues"
+  },
+  "homepage": "https://github.com/efte/efte.js",
+  "devDependencies": {
+    "neuron": "*",
+    "assert": "*"
+  }
+}
