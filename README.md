@@ -1,6 +1,6 @@
 # efte.js
 
-The foundation js bridge for efte projects
+The foundation js bridge for efte projects, it provides js bridges that used in webview or browser (when you do local development).
 
 ## Install
 
@@ -11,5 +11,5 @@ $ cortex install efte --save
 ## Usage
 
 ```js
-var efte_js = require('efte');
+var Efte = require('efte');
 ```
