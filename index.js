@@ -1,39 +1,50 @@
-
-// Opt in to strict mode of JavaScript, [ref](http://is.gd/3Bg9QR)
-// Use this statement, you can stay away from several frequent mistakes 
 'use strict';
 
-// How to use a foreign module ?
-// Take 'jquery' for example:
-//
-// 1. to install a dependency, exec the command in your terminal
-// ```bash
-// cortex install jquery --save
-// ```
+var Efte = {};
 
-// 2. use `require(id)` method:
-// ```js
-// var $ = require('jquery');
-// ```
 
-// `exports` is the API of the current module,
-// If another module `require('efte.js')`, it returns `exports`
-exports.my_method = function() {
-    // your code...
-};
+// detect webview
+var ioswebview, androidwebview;
 
-// or you could code like this:
-// ```js
-// module.exports = {
-// 	my_method: function() {
-//   		hello();
-// 	}
-// };
-// ```
 
-// But, NEVER do this:
-// ```js
-// exports = {my_method: ...}
-// ```
+(function() {
+  var standalone = window.navigator.standalone,
+    userAgent = window.navigator.userAgent.toLowerCase(),
+    safari = /safari/.test(userAgent),
+    android = /android/.test(userAgent),
+    ios = /iphone|ipod|ipad/.test(userAgent);
 
-// Why?
+  if (ios) {
+    if (!standalone && !safari) {
+      return ioswebview = true;
+    }
+    // if (!standalone && safari) {
+    //   return browser = true;
+    // } else if (standalone && !safari) {
+    //   return browser = true;
+  }
+
+  if (android) {
+    // handle android and web
+  }
+
+
+})();
+
+if (ioswebview) {
+  Efte = require('./lib/ios');
+} else if (androidwebview) {
+  Efte = require('./lib/android');
+} else { // default go web.js
+  Efte = require('./lib/web');
+}
+
+
+if (typeof module != 'undefined') {
+  module.exports = Efte;
+}
+
+if (typeof window !== 'undefined') {
+  // DECISION: export to window or not
+  // window.Efte = module.exports;
+}
