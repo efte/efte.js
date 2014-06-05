@@ -13,5 +13,11 @@
   "bugs": {
     "url": "https://github.com/efte/efte.js/issues"
   },
-  "homepage": "https://github.com/efte/efte.js"
+  "homepage": "https://github.com/efte/efte.js",
+  "cortex": {
+    "devDependencies": {
+      "neuron": "*",
+      "assert": "*"
+    }
+  }
 }
