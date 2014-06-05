@@ -46,5 +46,5 @@ if (typeof module != 'undefined') {
 
 if (typeof window !== 'undefined') {
   // DECISION: export to window or not
-  // window.Efte = module.exports;
+  window.Efte = Efte;
 }
