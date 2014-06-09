@@ -13,3 +13,5 @@ $ cortex install efte --save
 ```js
 var Efte = require('efte');
 ```
+```test
+```
