@@ -1,6 +1,6 @@
 {
   "name": "efte",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "Foundation js for efte projects",
   "main": "index.js",
   "repository": "https://github.com/efte/efte.js",
