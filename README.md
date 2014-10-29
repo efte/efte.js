@@ -138,6 +138,7 @@ Efte.action.openUrl('http://m.dianping.com');
 Get the query params previous page pass
 
 - callback: `Function`, called with params `query`
+
   query: `Object`, default `{}`
 
 ```js
@@ -151,6 +152,18 @@ Efte.action.get(function (query) {
 **reloadPage** `Efte.action.reloadPage()`
 Reload current page.
 
+## - getAppVersion
+
+**getAppVersion** `Efte.getAppVersion(callback)`
+Get App version.
+
+- callback: `Function`, called with version string.
+
+```js
+Efte.getAppVersion(function (version) {
+  console.log(version);
+});
+```
 
 Plugins
 =======
@@ -163,10 +176,11 @@ Set buttons of top right corner.
 
 - buttons: `Array`, `[button...]`
 
-  button: `Object`
+**Button** `Object`
 
-  title: `String`
-  action: `Function`, handler for user taped the button.
+- button: `Object`
+- title: `String`
+- action: `Function`, handler for user taped the button.
 
 ```js
 Efte.setBarButtons([{
@@ -183,13 +197,15 @@ Efte.setBarButtons([{
 Useful Datetime Picker.
 
 - options: `Object`, Config for Datetime Picker.
-
-  type: `String`, set Datetime Picker type. eg: `'date | time | datetime(default)'`
-  default: `String`, set default show datetime in Datetime Picker. eg: `'2014-11-11 | 12:12:12 | 2014-11-11 12:12:12(default)'`
-  minuteInterval: `Integer`, must divide exactly by 60, set the minute step of Datetime Picker.
-  minDate: `Integer`, set the min indate, milliseconds start at 1970. eg: `1402012800000`
-  maxDate: `Integer`, set the max indate, milliseconds start at 1970. eg: `1414569430214`
 - callback: `Function`, called with user picked datetime string
+
+**options** `Object`
+
+- type: `String`, set Datetime Picker type. eg: `'date | time | datetime(default)'`
+- default: `String`, set default show datetime in Datetime Picker. eg: `'2014-11-11 | 12:12:12 | 2014-11-11 12:12:12(default)'`
+- minuteInterval: `Integer`, must divide exactly by 60, set the minute step of Datetime Picker.
+- minDate: `Integer`, set the min indate, milliseconds start at 1970. eg: `1402012800000`
+- maxDate: `Integer`, set the max indate, milliseconds start at 1970. eg: `1414569430214`
 
 ```js
 Efte.date({
@@ -223,20 +239,48 @@ Pick photo from photo gallary or camera;
 
 - callbck: `Function`, called with `photoInfo`.
 
-  photoInfo: `Object`
+**PhotoInfo** `Object`
 
-  name: `String`, photo name at gallary.
+- name: `String`, photo name at gallary.
+
+```js
+Efte.takePhoto(function (photo) {
+  console.log(JSON.stringify(photo));
+});
+```
+
+## - takePhotoByName
+
+**takePhotoByName** `Efte.takePhotoByName(name, callback, fail)`
+Get photo info by name.
+
+- name: `String`, photo name, returned by `takePhoto`.
+- callback: `Function`, call with `photoInfo`.
+
+**PhotoInfo** `Object`
+
+- name: `String`, photo name at gallary.
+
+```js
+Efte.takePhotoByName('ime.png', functioin (photo) {
+  console.log(JSON.stringify(photo));
+}, function (errMsg) {
+  console.log(errMsg);
+});
+```
 
 ## - showPhoto
 
 **showPhoto** `Efte.showPhoto(photo, onDelete)`
 Show large photo.
 
-- photo: `Object`, photo info.
-
-  url: `String`, full size image url.
-  editable: `Boolean`, exactly deletable.
+- photo: `PhotoInfo`
 - onDelete: `Function`, delete callback.
+
+**PhotoInfo** `Object`
+
+- url: `String`, full size image url.
+- editable: `Boolean`, exactly deletable.
 
 ```js
 Efte.showPhoto({
@@ -278,4 +322,18 @@ Efte.startRefresh = function () {
 }
 ```
 
+## - multievelFromResource
 
+**multievelFromResource** `Efte.multievelFromResource(unit, path, values, callback)`
+
+```js
+Efte.multievelFromResource(unit, path, values, function () {});
+```
+
+## - multilevel
+
+**multilevel** `Efte.multilevel(options, values, callback)`
+
+```js
+Efte.multilevel(options, values, callback);
+```
