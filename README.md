@@ -80,6 +80,7 @@ Plugins
 Useful Datetime Picker.
 
 - options: `Object`, Config for Datetime Picker.
+
   type: `String`, set Datetime Picker type. eg: `'date | time | datetime(default)'`
   default: `String`, set default show datetime in Datetime Picker. eg: `'2014-11-11 | 12:12:12 | 2014-11-11 12:12:12(default)'`
   minuteInterval: `Integer`, must divide exactly by 60, set the minute step of Datetime Picker.
@@ -118,6 +119,7 @@ Efte.geo.getCurrentPosition(function (coords) {
 Show large photo.
 
 - photo: `Object`, photo info.
+
   url: `String`, full size image url.
   editable: `Boolean`, exactly deletable.
 - onDelete: `Function`, delete callback.
