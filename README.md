@@ -169,6 +169,31 @@ Plugins
 =======
 Useful plugins efte.js support currently.
 
+## - ajax
+
+**ajax** `Efte.ajax(options)`
+Request by native, no problem with CORS.
+
+**options** `Object`
+
+- method: `String`, eg: `'GET | POST | PUT | DELETE'`.
+- url: `String`, eg: `'http://efte.io/api/test'`.
+- data: `Object`, JSON object.
+- success: `Function`, called with server result.
+- error: `Function`, called with `status` and `errMsg`.
+
+```js
+Efte.ajax({
+  method: 'GET',
+  url: 'http://efte.io/api/test',
+  data: {},
+  success: function (data) {},
+  error: function (status, errMsg) {
+    alert(errMsg);
+  }
+});
+```
+
 ## - setBarButtons
 
 **setBarButtons** `Efte.setBarButtons(buttons)`
