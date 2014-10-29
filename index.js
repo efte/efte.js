@@ -1,71 +1,32 @@
-'use strict';
+//    efte.js 1.1.0
 
-// var Efte = {};
+//    (c) 2014 JS part for EFTE framework
+//    For all details and documentation:
+//    http://eftejs.io
 
+(function (Host) {
+  var Efte;
 
-// // detect webview
-// var ioswebview, androidwebview;
+  var userAgent = Host.navigator.userAgent.toLowerCase();
 
+  // Require different platform js base on userAgent.
+  // Native part will inject the userAgent with string `efte`.
+  if (/efte\b/.test(userAgent)) {
+    Efte = require('./lib/ios');
 
-// (function() {
-//   var standalone = window.navigator.standalone,
-//     userAgent = window.navigator.userAgent.toLowerCase(),
-//     safari = /safari/.test(userAgent),
-//     android = /android/.test(userAgent),
-//     ios = /iphone|ipod|ipad/.test(userAgent);
+  // Default web.js
+  } else {
+    Efte = require('./lib/web');
+  }
 
-//   if (ios) {
-//     if (!standalone && !safari) {
-//       return ioswebview = true;
-//     }
-//     // if (!standalone && safari) {
-//     //   return browser = true;
-//     // } else if (standalone && !safari) {
-//     //   return browser = true;
-//   }
+  // Export Efte object, if support AMD, CMD, CommonJS.
+  if (typeof module !== 'undefined') {
+    module.exports = Efte;
+  }
 
-//   if (android) {
-//     // handle android and web
-//   }
+  // Export Efte object to Host
+  if (typeof Host !== 'undefined') {
+    Host.Efte = Efte;
+  }
+}(this));
 
-
-// })();
-
-// if (ioswebview) {
-//   Efte = require('./lib/ios');
-// } else if (androidwebview) {
-//   Efte = require('./lib/android');
-// } else { // default go web.js
-//   Efte = require('./lib/web');
-// }
-
-
-// if (typeof module != 'undefined') {
-//   module.exports = Efte;
-// }
-
-// if (typeof window !== 'undefined') {
-//   // DECISION: export to window or not
-//   window.Efte = Efte;
-// }
-
-var Efte;
-
-var userAgent = window.navigator.userAgent.toLowerCase();
-
-if (/efte\b/.test(userAgent)) {
-  Efte = require('./lib/ios');
-
-} else { // default go web.js
-  Efte = require('./lib/web');
-}
-
-
-if (typeof module !== 'undefined') {
-  module.exports = Efte;
-}
-
-if (typeof window !== 'undefined') {
-  // DECISION: export to window or not
-  window.Efte = Efte;
-}
