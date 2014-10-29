@@ -20,11 +20,12 @@ var Efte = require('efte');
 
 API Base
 ========
+Common api for efte
 
 ## - send_message
 
 **send_message**  `Efte.send_message(method, args, callback)`
-JS call native method, use args, and will callback with the native JSON result.
+JS call native method with args, and will callback with the native JSON result.
 
 - method: `String`, eg: `'ajax'`
 - args: `Object`, eg: `{}`
@@ -70,11 +71,113 @@ Efte.subscribe('unit-m-customer-add-customer', function (customer) {
 });
 ```
 
+## - setTitle
+
+**setTitle** `Efte.setTitle(title)`
+Set page title, it will show on header.
+
+- title: `String`
+
+```js
+Efte.setTitle('首页');
+```
+
+## - action.open
+
+**open** `Efte.action.open(unit, path, query, modal, animate)`
+Open a new webview to load `{unit}/{path}?query`.
+
+- unit: `String`, unit name.
+- path: `String`, page path. eg: `'src/index'`.
+- query: `Object`, query params, default `{}`.
+- modal: `Boolean`, open like modal, slide from bottom to top, default `false`.
+- animate: `Boolean`, open with animate, default `true`.
+
+```js
+Efte.action.open('unit-m-home', 'src/home', { bu: '交易平台' });
+```
+
+## - action.back
+
+**back** `Efte.action.back(animate)`
+Close current webview.
+
+- animate: `Boolean`, default `true`.
+
+```js
+Efte.action.back();
+```
+
+## - action.dismiss
+
+**dismiss** `Efte.action.dismiss(animate)`
+Close current modal webview.
+
+- animate: `Boolean`, default `true`.
+
+```js
+Efte.action.dismiss();
+```
+
+## - action.openUrl
+
+**openUrl** `Efte.action.openUrl(url, modal, animate)`
+Open a new webview to load url.
+
+- url: `String`
+- modal: `Boolean`, open like modal, slide from bottom to top, default `false`.
+- animate: `Boolean`, open with animate, default `true`.
+
+```js
+Efte.action.openUrl('http://m.dianping.com');
+```
+
+## - action.get
+
+**get** `Efte.action.get(callback)`
+Get the query params previous page pass
+
+- callback: `Function`, called with params `query`
+  query: `Object`, default `{}`
+
+```js
+Efte.action.get(function (query) {
+  console.log(JSON.stringify(query));
+});
+```
+
+## - action.reloadPage
+
+**reloadPage** `Efte.action.reloadPage()`
+Reload current page.
+
 
 Plugins
 =======
+Useful plugins efte.js support currently.
 
-## date
+## - setBarButtons
+
+**setBarButtons** `Efte.setBarButtons(buttons)`
+Set buttons of top right corner.
+
+- buttons: `Array`, `[button...]`
+
+  button: `Object`
+
+  title: `String`
+  action: `Function`, handler for user taped the button.
+
+```js
+Efte.setBarButtons([{
+  title: '设置',
+  action: function () {
+    console.log('taped');
+  }
+}]);
+```
+
+## - date
 
 **date** `Efte.date(options, callback)`
 Useful Datetime Picker.
@@ -97,7 +200,7 @@ Efte.date({
 });
 ```
 
-## geo.getCurrentPosition
+## - geo.getCurrentPosition
 
 **getCurrentPosition** `Efte.geo.getCurrentPosition(success, error)`
 Get current geo coords like `{ lng: 121.4268740794 , lat: 31.2202555095 }`.
@@ -113,7 +216,18 @@ Efte.geo.getCurrentPosition(function (coords) {
 });
 ```
 
-## showPhoto
+## - takePhoto
+
+**takePhoto** `Efte.takePhoto(callback)`
+Pick photo from photo gallary or camera;
+
+- callbck: `Function`, called with `photoInfo`.
+
+  photoInfo: `Object`
+
+  name: `String`, photo name at gallary.
+
+## - showPhoto
 
 **showPhoto** `Efte.showPhoto(photo, onDelete)`
 Show large photo.
@@ -132,4 +246,36 @@ Efte.showPhoto({
   // delete in the photos
 });
 ```
+
+## - enableRefresh
+
+**enableRefresh** `Efte.enableRefresh()`
+Enable pull down refresh. Need be called before use `startRefresh`
+
+## - startRefresh
+
+**startRefresh**
+Override this function, it will be called when user pull down the webview.
+
+```js
+Efte.startRefresh = function () {
+  // refresh data and update DOM
+
+  Efte.stopRefresh();
+}
+```
+
+## - stopRefresh
+
+**stopRefresh** `Efte.stopRefresh()`
+Use to stop refresh at the end of `startRefresh`.
+
+```js
+Efte.startRefresh = function () {
+  // refresh data and update DOM
+
+  Efte.stopRefresh();
+}
+```
+
 
