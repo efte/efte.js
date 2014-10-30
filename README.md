@@ -347,18 +347,105 @@ Efte.startRefresh = function () {
 }
 ```
 
-## - multievelFromResource
+## - multilevelFromResource
 
-**multievelFromResource** `Efte.multievelFromResource(unit, path, values, callback)`
+**multilevelFromResource** `Efte.multilevelFromResource(unit, path, values, callback)`
+A selector for deep level data.
+
+- unit: `String`, unit name. eg: `'unit-m-name'`
+- path: `String`, path of json resource, not only support `.json` file, but also other file extentions, just data can be `JSON.parse`.
+- values: `Array`, default selected values of each level. eg: [1, 2, 3]
+- callback: `Function`, called after user finish selected each level with selected items.
+
+**JsonResource** `Array`
+Array of items.
+
+**Item** `Object`
+
+- text: `String`.
+- value: `Integer`.
+- children: `Array`, same as `JsonResource`.
 
 ```js
-Efte.multievelFromResource(unit, path, values, function () {});
+// src/resource/city.json
+[
+  {
+    "text": "上海",
+    "value": 1,
+    "children": [
+      {
+        "text": "卢湾区",
+        "value": 1
+      }, {
+        "text": "徐汇区",
+        "value": 2
+      },
+      ...
+    ]
+  },
+  {
+    "text": "北京",
+    "value": 2,
+    "children": [
+      {
+        "text": "朝阳区",
+        "value": 14
+      }, {
+        "text": "东城区",
+        "value": 15
+      },
+      ...
+    ]
+  }
+]
+```
+
+```js
+Efte.multilevelFromResource('unit-m-name', 'src/resource/city.json', [1, 2], function (items) {
+  console.log(JSON.stringify(items)).
+});
 ```
 
 ## - multilevel
 
 **multilevel** `Efte.multilevel(options, values, callback)`
+A selector for deep level data. Same as `multilevelFromResource`.
+
+- options: `Array`, same as `JsonResource`
+- values: `Array`, default selected values of each level. eg: [1, 2, 3]
+- callback: `Function`, called after user finish selected each level with selected items.
 
 ```js
-Efte.multilevel(options, values, callback);
+Efte.multilevel([
+  {
+    "text": "上海",
+    "value": 1,
+    "children": [
+      {
+        "text": "卢湾区",
+        "value": 1
+      }, {
+        "text": "徐汇区",
+        "value": 2
+      },
+      ...
+    ]
+  },
+  {
+    "text": "北京",
+    "value": 2,
+    "children": [
+      {
+        "text": "朝阳区",
+        "value": 14
+      }, {
+        "text": "东城区",
+        "value": 15
+      },
+      ...
+    ]
+  }
+], [1, 2], function (items) {
+  console.log(JSON.stringify(items)).
+});
 ```
